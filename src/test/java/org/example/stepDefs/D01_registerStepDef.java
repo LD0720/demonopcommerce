@@ -1,4 +1,5 @@
 package org.example.stepDefs;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -6,16 +7,16 @@ import io.cucumber.java.en.When;
 import org.example.pages.P01_register;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
+
+import java.awt.*;
 
 public class D01_registerStepDef {
     P01_register register = new P01_register();
     @Given("user go to register page")
     public void goRegisterPage() {
-       // System.out.println("This is a test before start coding");
-       /* WebElement registerBtn = Hooks.driver.findElement(By.cssSelector("a[href=\"/register?returnUrl=%2F\"]"));
-        registerBtn.click();*/
         register.registerLink().click();
     }
 
@@ -58,10 +59,13 @@ public class D01_registerStepDef {
 
     @Then("success message is displayed")
     public void successMessageIsDisplayed() {
-        String actualSuccessMsg = Hooks.driver.findElement(By.cssSelector("div[class=\"page-body\"]")).getText();
+        String actualSuccessMsg =register.verifyRegistration().getText();
         String expectedSuccessMsg = "Your registration completed";
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(actualSuccessMsg.contains(expectedSuccessMsg));
+        String color = register.verifyRegistration().getCssValue("color");
+        System.out.println("Colour:  "+ color);
+        softAssert.assertEquals(color,"rgba(76, 177, 124, 1)");
         softAssert.assertAll();
     }
 }

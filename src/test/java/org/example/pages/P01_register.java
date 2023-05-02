@@ -38,5 +38,8 @@ public class P01_register {
         return Hooks.driver.findElement(By.id("register-button"));
     }
 
+    public WebElement verifyRegistration(){
+        return  Hooks.driver.findElement(By.className("result"));
+    }
 
 }
