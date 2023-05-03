@@ -17,9 +17,12 @@ public class P02_login {
         return Hooks.driver.findElement(By.className("password"));
     }
     public WebElement loginBtn(){
-        return Hooks.driver.findElement(By.className("button-1"));
+        return Hooks.driver.findElement(By.className("login-button"));
     }
     public String pageURL(){
         return Hooks.driver.getCurrentUrl();
+    }
+    public WebElement verifyUnsuccessfulLogin(){
+        return  Hooks.driver.findElement(By.className("message-error"));
     }
 }

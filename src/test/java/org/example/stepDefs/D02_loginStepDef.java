@@ -7,12 +7,15 @@ import io.cucumber.java.en.When;
 import org.example.pages.P02_login;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.Color;
 import org.testng.asserts.SoftAssert;
+
 
 public class D02_loginStepDef {
     P02_login login = new P02_login();
+
     @Given("user go to login page")
-    public void loginPage(){
+    public void loginPage() {
         login.loginLink().click();
     }
 
@@ -31,11 +34,11 @@ public class D02_loginStepDef {
     public void userLoginToTheSystemSuccessfully() {
         String url = login.pageURL();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(url,"https://demo.nopcommerce.com/");
+        softAssert.assertEquals(url, "https://demo.nopcommerce.com/");
         Boolean flag = true;
-        try{
-        Hooks.driver.findElement(By.className("ico-account"));
-        }catch(NoSuchElementException e){
+        try {
+            Hooks.driver.findElement(By.className("ico-account"));
+        } catch (NoSuchElementException e) {
             flag = false;
         }
         softAssert.assertTrue(flag);
@@ -44,16 +47,13 @@ public class D02_loginStepDef {
 
     @Then("user could not login to the system")
     public void userCouldNotLoginToTheSystem() {
-        String url = login.pageURL();
+        String actualSuccessMsg = login.verifyUnsuccessfulLogin().getText();
+        String expectedSuccessMsg = "Login was unsuccessful. Please correct the errors and try again.";
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(url,"https://demo.nopcommerce.com/");
-        Boolean flag = true;
-        try{
-            Hooks.driver.findElement(By.className("ico-account"));
-        }catch(NoSuchElementException e){
-            flag = false;
-        }
-        softAssert.assertFalse(flag);
+        softAssert.assertTrue(actualSuccessMsg.contains(expectedSuccessMsg));
+        String color = Color.fromString(login.verifyUnsuccessfulLogin().getCssValue("color")).asHex();
+        System.out.println("Colour:  " + color);
+        softAssert.assertEquals(color, "#e4434b");
         softAssert.assertAll();
     }
 }
