@@ -14,8 +14,12 @@ public class P04_search {
         return Hooks.driver.findElement(By.className("search-box-button"));
     }
     public List<WebElement> results(){
-        return Hooks.driver.findElements(By.className("product-item"));
+        return Hooks.driver.findElements(By.className("product-title"));
     }
+    public List<WebElement> resultPictures(){
+        return Hooks.driver.findElements(By.className("picture"));
+    }
+
     public String pageURL(){
         return Hooks.driver.getCurrentUrl();
     }
