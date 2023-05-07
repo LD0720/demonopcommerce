@@ -13,20 +13,21 @@ import java.util.concurrent.TimeUnit;
 
 public class D05_hoverCategoriesStepDef {
     P05_hover hover = new P05_hover();
-    String SelectedCategoryName ;
-    int SelectedCategoryIndex ;
+    String SelectedCategoryName;
+    int SelectedCategoryIndex;
     List<WebElement> mainLinks;
     int max;
     int min;
+
     @When("hovering over a category")
     public void hoverCategory() throws InterruptedException {
-        Actions actions=new Actions(Hooks.driver);
-        mainLinks =hover.getCategoriesList();
+        Actions actions = new Actions(Hooks.driver);
+        mainLinks = hover.getCategoriesList();
         int count = mainLinks.size();
 
         min = 0;
-         max = count-1;
-        SelectedCategoryIndex = (int)Math.floor(Math.random()*(max-min+1)+min);
+        max = count - 1;
+        SelectedCategoryIndex = (int) Math.floor(Math.random() * (max - min + 1) + min);
         actions.moveToElement(mainLinks.get(SelectedCategoryIndex)).perform();
         SelectedCategoryName = mainLinks.get(SelectedCategoryIndex).getText();
         Thread.sleep(2000);
@@ -35,21 +36,18 @@ public class D05_hoverCategoriesStepDef {
     @And("choosing a sub category")
     public void choosingASubCategory() {
         SelectedCategoryIndex += 1;
-        String locator = "(//ul[@class='top-menu notmobile']//ul)["+SelectedCategoryIndex+"]/li";
+        String locator = "(//ul[@class='top-menu notmobile']//ul)[" + SelectedCategoryIndex + "]/li";
         List<WebElement> subCategoryLinks = hover.getSubCategoryList(locator);
         Hooks.driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        String selectedSubCategoryText;
-        if(!subCategoryLinks.isEmpty()) {
-            int subCategoryCount = subCategoryLinks.size();
+        min = 0;
+        max = subCategoryLinks.size()-1;
+        if (!subCategoryLinks.isEmpty()) {
             int selectedSubCategory = (int) Math.floor(Math.random() * (max - min + 1) + min);
-            selectedSubCategoryText = subCategoryLinks.get(selectedSubCategory).getText();
             subCategoryLinks.get(selectedSubCategory).click();
-        }
-        else
-        {
+        } else {
             mainLinks.get(SelectedCategoryIndex).click();
         }
-        Hooks.driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        Hooks.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Then("the sub category title should be relevant to the category")
