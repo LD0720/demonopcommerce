@@ -15,6 +15,6 @@ public class P05_hover {
         return Hooks.driver.findElements(By.xpath(l));
     }
     public WebElement getTitle() {
-        return Hooks.driver.findElement(By.className("page-title"));
+        return Hooks.driver.findElement(By.cssSelector("div[class=\"page-title\"]"));
     }
 }
