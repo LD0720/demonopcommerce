@@ -1,6 +1,7 @@
 package org.example.stepDefs;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.pages.P05_hover;
@@ -19,7 +20,7 @@ public class D05_hoverCategoriesStepDef {
     int max;
     int min;
 
-    @When("hovering over a category")
+    @Given("hovering over a category")
     public void hoverCategory() throws InterruptedException {
         Actions actions = new Actions(Hooks.driver);
         mainLinks = hover.getCategoriesList();
@@ -33,7 +34,7 @@ public class D05_hoverCategoriesStepDef {
         Thread.sleep(2000);
     }
 
-    @And("choosing a sub category")
+    @When("choosing a sub category")
     public void choosingASubCategory() {
         SelectedCategoryIndex += 1;
         String locator = "(//ul[@class='top-menu notmobile']//ul)[" + SelectedCategoryIndex + "]/li";
