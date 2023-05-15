@@ -15,15 +15,18 @@ public class D07_followUsStepDef {
 
     @Given("user clicks on facebook icon")
     public void openFacebookLink(){
-        tabs = new ArrayList<>(Hooks.driver.getWindowHandles());
+        tabs = new ArrayList<>();
       follows.facebookLink().click();
-        WebDriverWait wait = new WebDriverWait(Hooks.driver, Duration.ofSeconds(3));
-        tabs.add(Hooks.driver.getWindowHandle());
+
     }
 
     @Then("the facebook website appears")
     public void theFacebookWebsiteAppears() {
-        Hooks.driver.switchTo().window(tabs.get(0));
+
+        WebDriverWait wait = new WebDriverWait(Hooks.driver, Duration.ofSeconds(3));
+        tabs.addAll(Hooks.driver.getWindowHandles());
+        System.out.println(tabs);
+        Hooks.driver.switchTo().window(tabs.get(1));
         SoftAssert softAssert =new SoftAssert();
         System.out.println("Facebook : ");
         System.out.println("Tab 0 : " + tabs.get(0));
@@ -35,60 +38,67 @@ public class D07_followUsStepDef {
 
     @Then("the twitter website appears")
     public void theTwitterWebsiteAppears() {
+        WebDriverWait wait = new WebDriverWait(Hooks.driver, Duration.ofSeconds(3));
+        tabs.addAll(Hooks.driver.getWindowHandles());
+        System.out.println(tabs);
         Hooks.driver.switchTo().window(tabs.get(1));
         SoftAssert softAssert =new SoftAssert();
         System.out.println("Twitter : ");
         System.out.println("Tab 0 : " + tabs.get(0));
         System.out.println("Tab 1 : " +tabs.get(1));
-        System.out.println("Current url : " +follows.getURL() );
+        System.out.println("Current url : " +Hooks.driver.getCurrentUrl() );
         softAssert.assertTrue(follows.getURL().equals("https://twitter.com/nopCommerce"));
         softAssert.assertAll();
     }
 
     @Given("user clicks on rss icon")
     public void userClicksOnRssIcon() {
-        tabs = new ArrayList<>(Hooks.driver.getWindowHandles());
-
+        tabs = new ArrayList<>();
        follows.rssLink().click();
-        tabs.add(Hooks.driver.getWindowHandle());
+
     }
 
     @Then("the rss website appears")
     public void theRssWebsiteAppears() {
+        WebDriverWait wait = new WebDriverWait(Hooks.driver, Duration.ofSeconds(3));
+        tabs.addAll(Hooks.driver.getWindowHandles());
+        System.out.println(tabs);
         Hooks.driver.switchTo().window(tabs.get(1));
         SoftAssert softAssert =new SoftAssert();
         System.out.println("RSS : ");
         System.out.println("Tab 0 : " + tabs.get(0));
         System.out.println("Tab 1 : " +tabs.get(1));
-        System.out.println("Current url : " +follows.getURL() );
+        System.out.println("Current url : " +Hooks.driver.getCurrentUrl() );
         softAssert.assertTrue( follows.getURL().equals("https://demo.nopcommerce.com/new-online-store-is-open"));
         softAssert.assertAll();
     }
 
     @Given("user clicks on youtube icon")
     public void userClicksOnYoutubeIcon() {
-        tabs = new ArrayList<>(Hooks.driver.getWindowHandles());
+        tabs = new ArrayList<>();
        follows.youtubeLink().click();
-        tabs.add(Hooks.driver.getWindowHandle());
+
 
     }
 
     @Then("the youtube website appears")
     public void theYoutubeWebsiteAppears() {
+        WebDriverWait wait = new WebDriverWait(Hooks.driver, Duration.ofSeconds(3));
+        tabs.addAll(Hooks.driver.getWindowHandles());
+        System.out.println(tabs);
         Hooks.driver.switchTo().window(tabs.get(1));
         SoftAssert softAssert =new SoftAssert();
-        System.out.println("Youtube : ");
+        System.out.println("youtube : ");
         System.out.println("Tab 0 : " + tabs.get(0));
         System.out.println("Tab 1 : " +tabs.get(1));
-        System.out.println("Current url : " +follows.getURL() );
+        System.out.println("Current url : " +Hooks.driver.getCurrentUrl() );
         softAssert.assertTrue(follows.getURL().equals("https://www.youtube.com/user/nopCommerce"));
         softAssert.assertAll();
     }
 
    @Given("user clicks on twitter icon")
    public void userClicksOnTwitterIcon() {
-       tabs = new ArrayList<>(Hooks.driver.getWindowHandles());
+       tabs = new ArrayList<>();
        follows.twitterLink().click();
-       tabs.add(Hooks.driver.getWindowHandle());
    }
 }

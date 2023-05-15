@@ -9,7 +9,7 @@ public class P07_follow {
         return Hooks.driver.findElement(By.cssSelector("a[href='http://www.facebook.com/nopCommerce']"));
     }
     public WebElement twitterLink(){
-        return Hooks.driver.findElement(By.cssSelector("a[href='http://www.facebook.com/nopCommerce']"));
+        return Hooks.driver.findElement(By.cssSelector("a[href='https://twitter.com/nopCommerce']"));
     }
     public WebElement youtubeLink(){
         return Hooks.driver.findElement(By.cssSelector("a[href='http://www.youtube.com/user/nopCommerce']"));

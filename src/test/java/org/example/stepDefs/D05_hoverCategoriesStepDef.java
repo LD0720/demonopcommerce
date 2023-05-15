@@ -46,7 +46,7 @@ public class D05_hoverCategoriesStepDef {
             int selectedSubCategory = (int) Math.floor(Math.random() * (max - min + 1) + min);
             subCategoryLinks.get(selectedSubCategory).click();
         } else {
-            mainLinks.get(SelectedCategoryIndex).click();
+            mainLinks.get(SelectedCategoryIndex-1).click();
         }
         Hooks.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
